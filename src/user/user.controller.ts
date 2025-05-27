@@ -1,17 +1,18 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
   Version,
   VERSION_NEUTRAL,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { BusinessException } from '../common/exception/business.exception';
 
 @Controller('user')
 export class UserController {
@@ -47,5 +48,25 @@ export class UserController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
+  }
+
+  @Get('findError')
+  @Version([VERSION_NEUTRAL, '1'])
+  findError() {
+    const a: any = {};
+    console.log(a.b.c);
+    return this.userService.findAll();
+  }
+
+  @Get('findBusinessError')
+  @Version([VERSION_NEUTRAL, '1'])
+  findBusinessError() {
+    const a: any = {};
+    try {
+      console.log(a.b.c);
+    } catch (error) {
+      throw new BusinessException('参数报错:\n' + error);
+    }
+    return this.userService.findAll();
   }
 }

@@ -9,7 +9,14 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
 import { AllExceptionsFilter } from './common/exception/base.exception.filter';
 import { HttpExceptionFilter } from './common/exception/http.exception.filter';
 
+declare const module: any;
+
 async function bootstrap() {
+  if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => app.close());
+  }
+
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(),

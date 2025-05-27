@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GatewayController } from './gateway/gateway.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { UserModule } from './user/user.module';
 
 /**
  * 根模块用于处理其他类的引用与共享。
@@ -19,6 +20,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         },
       },
     ]),
+    UserModule,
   ],
   controllers: [AppController, GatewayController],
   providers: [AppService],

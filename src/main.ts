@@ -5,6 +5,7 @@ import {
 } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
 import { VERSION_NEUTRAL, VersioningType } from '@nestjs/common';
+import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -17,6 +18,9 @@ async function bootstrap() {
     type: VersioningType.URI,
     defaultVersion: [VERSION_NEUTRAL, '1', '2'],
   });
+
+  // 全局参数返回
+  app.useGlobalInterceptors(new TransformInterceptor());
 
   await app.listen(3000, '0.0.0.0');
 }

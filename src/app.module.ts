@@ -4,6 +4,9 @@ import { AppService } from './app.service';
 import { GatewayController } from './gateway/gateway.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
+/**
+ * 根模块用于处理其他类的引用与共享。
+ */
 @Module({
   imports: [
     ClientsModule.register([

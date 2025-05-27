@@ -9,6 +9,9 @@ import {
 } from '@nestjs/common';
 import { useContainer } from 'class-validator';
 
+/**
+ * 应用程序入口文件。它使用 NestFactory 用来创建 Nest 应用实例。
+ */
 async function bootstrap() {
   const logger = new Logger('Gateway');
 

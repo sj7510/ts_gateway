@@ -10,7 +10,6 @@ export const getEnv = () => {
 // 读取项目配置
 export const getConfig = () => {
   const environment = getEnv();
-  console.log(path);
   const yamlPath = path.join(process.cwd(), `./.config/.${environment}.yaml`);
   const file = fs.readFileSync(yamlPath, 'utf8');
   return parse(file);

@@ -4,7 +4,11 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
-import { VERSION_NEUTRAL, VersioningType } from '@nestjs/common';
+import {
+  ValidationPipe,
+  VERSION_NEUTRAL,
+  VersioningType,
+} from '@nestjs/common';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { AllExceptionsFilter } from './common/exception/base.exception.filter';
 import { HttpExceptionFilter } from './common/exception/http.exception.filter';
@@ -23,6 +27,9 @@ async function bootstrap() {
     type: VersioningType.URI,
     defaultVersion: [VERSION_NEUTRAL, '1', '2'],
   });
+
+  // 启动全局字段校验，保证接口请求字段校验正确
+  app.useGlobalPipes(new ValidationPipe());
 
   // 全局参数返回
   app.useGlobalInterceptors(new TransformInterceptor());

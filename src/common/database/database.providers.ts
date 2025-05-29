@@ -31,16 +31,11 @@ export const DatabaseProviders = [
     provide: 'MONGODB_DATA_SOURCE',
     useFactory: async () => {
       try {
-        console.log(
-          'Initializing MongoDB connection with config:',
-          JSON.stringify(MONGODB_DATABASE_CONFIG, null, 2),
-        );
         await MONGODB_DATA_SOURCE.initialize();
         console.log('MongoDB connection initialized successfully');
         return MONGODB_DATA_SOURCE;
       } catch (error) {
         console.error('Failed to initialize MongoDB connection:', error);
-        console.error('Error stack:', error.stack);
         throw error;
       }
     },

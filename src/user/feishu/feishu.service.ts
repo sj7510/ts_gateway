@@ -8,7 +8,7 @@ import { messages } from '@/helper/feishu/message';
 
 @Injectable()
 export class FeishuService {
-  private APP_TOKEN_CACHE_KEY;
+  private readonly APP_TOKEN_CACHE_KEY: string;
 
   constructor(
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
@@ -38,7 +38,7 @@ export class FeishuService {
     return appToken;
   }
 
-  async sendMessage(receive_id_type, params) {
+  async sendMessage(receive_id_type: any, params: any) {
     const app_token = await this.getAppToken();
     return messages(receive_id_type, params, app_token as string);
   }

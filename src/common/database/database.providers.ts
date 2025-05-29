@@ -6,9 +6,16 @@ import * as path from 'path';
 const databaseType: DataSourceOptions['type'] = 'mongodb';
 const { MONGODB_CONFIG } = getConfig();
 
+// Construct the MongoDB URL with authentication credentials
+const mongoUrl =
+  MONGODB_CONFIG.username && MONGODB_CONFIG.password
+    ? `mongodb://${MONGODB_CONFIG.username}:${MONGODB_CONFIG.password}@${new URL(MONGODB_CONFIG.url).host}/${MONGODB_CONFIG.database}?authSource=admin`
+    : MONGODB_CONFIG.url;
+
 const MONGODB_DATABASE_CONFIG = {
   ...MONGODB_CONFIG,
   type: databaseType,
+  url: mongoUrl,
   entities: [
     path.join(
       __dirname,
@@ -23,8 +30,19 @@ export const DatabaseProviders = [
   {
     provide: 'MONGODB_DATA_SOURCE',
     useFactory: async () => {
-      await MONGODB_DATA_SOURCE.initialize();
-      return MONGODB_DATA_SOURCE;
+      try {
+        console.log(
+          'Initializing MongoDB connection with config:',
+          JSON.stringify(MONGODB_DATABASE_CONFIG, null, 2),
+        );
+        await MONGODB_DATA_SOURCE.initialize();
+        console.log('MongoDB connection initialized successfully');
+        return MONGODB_DATA_SOURCE;
+      } catch (error) {
+        console.error('Failed to initialize MongoDB connection:', error);
+        console.error('Error stack:', error.stack);
+        throw error;
+      }
     },
   },
 ];

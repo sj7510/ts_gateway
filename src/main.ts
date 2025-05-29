@@ -13,14 +13,18 @@ import {
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { AllExceptionsFilter } from './common/exception/base.exception.filter';
 import { HttpExceptionFilter } from './common/exception/http.exception.filter';
+import { FastifyLogger } from './common/logger';
 import { generateDocument } from './doc';
 
 declare const module: any;
 
 async function bootstrap() {
+  // Create the FastifyAdapter with logger options directly instead of passing a fastify instance
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter(),
+    new FastifyAdapter({
+      logger: FastifyLogger,
+    }),
   );
 
   // 接口版本化管理

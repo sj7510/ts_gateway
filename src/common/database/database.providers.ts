@@ -17,7 +17,6 @@ const MONGODB_DATABASE_CONFIG = {
   ],
 };
 const MONGODB_DATA_SOURCE = new DataSource(MONGODB_DATABASE_CONFIG);
-console.log('MONGODB_DATA_SOURCE', MONGODB_DATA_SOURCE);
 
 // 数据库注入
 export const DatabaseProviders = [

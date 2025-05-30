@@ -29,3 +29,17 @@ export class FeishuMessageDto {
   @ApiProperty({ example: 'text', enum: MSG_TYPE })
   msg_type?: keyof MSG_TYPE;
 }
+
+export class FeishuUserInfo {
+  accessToken?: string;
+  email: string;
+  avatarUrl: string;
+  avatarThumb: string;
+  avatarBig: string;
+  avatarMiddle: string;
+  mobile: string;
+  enName: string;
+  name: string;
+  feishuUserId: string;
+  feishuUnionId: string;
+}

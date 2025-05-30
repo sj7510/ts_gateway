@@ -4,6 +4,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import fastifyCookie from '@fastify/cookie';
 import { AppModule } from './app.module';
 import {
   ValidationPipe,
@@ -41,6 +42,11 @@ async function bootstrap() {
 
   // 全局异常过滤
   app.useGlobalFilters(new AllExceptionsFilter(), new HttpExceptionFilter());
+
+  // Register the cookie plugin
+  await app.register(fastifyCookie, {
+    secret: 'my-secret',
+  });
 
   // swagger
   generateDocument(app);

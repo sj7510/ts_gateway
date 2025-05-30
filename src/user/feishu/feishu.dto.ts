@@ -1,12 +1,20 @@
+import { RECEIVE_TYPE, MSG_TYPE } from '@/helper/feishu/message';
 import { ApiProperty } from '@nestjs/swagger';
-import { MSG_TYPE, RECEIVE_TYPE } from '@/helper/feishu/message';
-import { IsEnum, IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsEnum } from 'class-validator';
+
+export class GetUserTokenDto {
+  @IsNotEmpty()
+  @ApiProperty({ example: 'xxxx', description: '飞书临时登录凭证' })
+  code: string;
+
+  app_token: string;
+}
 
 export class FeishuMessageDto {
   @IsNotEmpty()
   @IsEnum(RECEIVE_TYPE)
   @ApiProperty({ example: 'email', enum: RECEIVE_TYPE })
-  receive_id_type: RECEIVE_TYPE;
+  receive_id_type?: keyof RECEIVE_TYPE;
 
   @IsNotEmpty()
   @ApiProperty({ example: 'cookieboty@qq.com' })

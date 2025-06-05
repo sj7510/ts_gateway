@@ -48,6 +48,7 @@
     "mongodb": "^6.17.0",
     "mongoose": "^8.15.1",
     "mysql2": "^3.14.1",
+    "nestjs-typeorm-paginate": "^4.1.0",
     "passport": "^0.7.0",
     "passport-custom": "^1.1.1",
     "passport-jwt": "^4.0.1",

@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { getConfig } from './utils';
 import { CacheModule } from '@nestjs/cache-manager';
@@ -8,6 +7,7 @@ import { AuthModule } from '@/auth/auth.module';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { JwtAuthGuard } from '@/auth/guards/jwt-auth.guard';
 import { TransformInterceptor } from '@/common/interceptors/transform.interceptor';
+import { PageModule } from '@/materials/page/page.module';
 
 @Module({
   imports: [
@@ -24,8 +24,8 @@ import { TransformInterceptor } from '@/common/interceptors/transform.intercepto
       isGlobal: true,
       load: [getConfig],
     }),
-    UserModule,
     AuthModule,
+    PageModule,
   ],
   controllers: [],
   providers: [

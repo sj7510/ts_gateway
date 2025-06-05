@@ -40,7 +40,8 @@ export const DatabaseProviders = [
   {
     provide: 'MYSQL_DATA_SOURCE',
     useFactory: async () => {
-      if (!MYSQL_DATA_SOURCE.isInitialized) await MYSQL_DATA_SOURCE.initialize();
+      if (!MYSQL_DATA_SOURCE.isInitialized)
+        await MYSQL_DATA_SOURCE.initialize();
       return MYSQL_DATA_SOURCE;
     },
   },

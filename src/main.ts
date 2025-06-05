@@ -6,12 +6,7 @@ import {
 } from '@nestjs/platform-fastify';
 import fastifyCookie from '@fastify/cookie';
 import { AppModule } from './app.module';
-import {
-  ValidationPipe,
-  VERSION_NEUTRAL,
-  VersioningType,
-} from '@nestjs/common';
-import { TransformInterceptor } from './common/interceptors/transform.interceptor';
+import { VERSION_NEUTRAL, VersioningType } from '@nestjs/common';
 import { AllExceptionsFilter } from './common/exception/base.exception.filter';
 import { HttpExceptionFilter } from './common/exception/http.exception.filter';
 import { FastifyLogger } from './common/logger';
@@ -33,12 +28,6 @@ async function bootstrap() {
     type: VersioningType.URI,
     defaultVersion: [VERSION_NEUTRAL, '1', '2'],
   });
-
-  // 启动全局字段校验，保证接口请求字段校验正确
-  app.useGlobalPipes(new ValidationPipe());
-
-  // 全局参数返回
-  app.useGlobalInterceptors(new TransformInterceptor());
 
   // 全局异常过滤
   app.useGlobalFilters(new AllExceptionsFilter(), new HttpExceptionFilter());

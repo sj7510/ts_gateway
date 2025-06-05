@@ -80,6 +80,9 @@ importers:
       mkdirp:
         specifier: ^3.0.1
         version: 3.0.1
+      mongodb:
+        specifier: ^6.17.0
+        version: 6.17.0
       mongoose:
         specifier: ^8.15.1
         version: 8.15.1
@@ -95,6 +98,9 @@ importers:
       passport-jwt:
         specifier: ^4.0.1
         version: 4.0.1
+      pino:
+        specifier: ^9.7.0
+        version: 9.7.0
       pino-multi-stream:
         specifier: ^6.0.0
         version: 6.0.0
@@ -112,7 +118,7 @@ importers:
         version: 4.2.0
       typeorm:
         specifier: ^0.3.24
-        version: 0.3.24(mongodb@6.16.0)(mysql2@3.14.1)(redis@4.7.1)(reflect-metadata@0.2.2)(ts-node@10.9.2(@types/node@20.17.50)(typescript@5.8.3))
+        version: 0.3.24(mongodb@6.17.0)(mysql2@3.14.1)(redis@4.7.1)(reflect-metadata@0.2.2)(ts-node@10.9.2(@types/node@20.17.50)(typescript@5.8.3))
       webpack:
         specifier: ^5.99.9
         version: 5.99.9
@@ -1284,6 +1290,10 @@ packages:
 
   bson@6.10.3:
     resolution: {integrity: sha512-MTxGsqgYTwfshYWTRdmZRC+M7FnG1b4y7RO7p2k3X24Wq0yv1m77Wsj0BzlPzd/IowgESfsruQCUToa7vbOpPQ==}
+    engines: {node: '>=16.20.1'}
+
+  bson@6.10.4:
+    resolution: {integrity: sha512-WIsKqkSC0ABoBJuT1LEX+2HEvNmNKKgnTAyd0fL8qzK4SH2i9NXg+t08YtdZp/V9IZ33cxe3iV4yM0qg8lMQng==}
     engines: {node: '>=16.20.1'}
 
   buffer-equal-constant-time@1.0.1:
@@ -2613,6 +2623,33 @@ packages:
 
   mongodb@6.16.0:
     resolution: {integrity: sha512-D1PNcdT0y4Grhou5Zi/qgipZOYeWrhLEpk33n3nm6LGtz61jvO88WlrWCK/bigMjpnOdAUKKQwsGIl0NtWMyYw==}
+    engines: {node: '>=16.20.1'}
+    peerDependencies:
+      '@aws-sdk/credential-providers': ^3.188.0
+      '@mongodb-js/zstd': ^1.1.0 || ^2.0.0
+      gcp-metadata: ^5.2.0
+      kerberos: ^2.0.1
+      mongodb-client-encryption: '>=6.0.0 <7'
+      snappy: ^7.2.2
+      socks: ^2.7.1
+    peerDependenciesMeta:
+      '@aws-sdk/credential-providers':
+        optional: true
+      '@mongodb-js/zstd':
+        optional: true
+      gcp-metadata:
+        optional: true
+      kerberos:
+        optional: true
+      mongodb-client-encryption:
+        optional: true
+      snappy:
+        optional: true
+      socks:
+        optional: true
+
+  mongodb@6.17.0:
+    resolution: {integrity: sha512-neerUzg/8U26cgruLysKEjJvoNSXhyID3RvzvdcpsIi2COYM3FS3o9nlH7fxFtefTb942dX3W9i37oPfCVj4wA==}
     engines: {node: '>=16.20.1'}
     peerDependencies:
       '@aws-sdk/credential-providers': ^3.188.0
@@ -5115,6 +5152,8 @@ snapshots:
 
   bson@6.10.3: {}
 
+  bson@6.10.4: {}
+
   buffer-equal-constant-time@1.0.1: {}
 
   buffer-from@1.1.2: {}
@@ -6680,6 +6719,12 @@ snapshots:
       bson: 6.10.3
       mongodb-connection-string-url: 3.0.2
 
+  mongodb@6.17.0:
+    dependencies:
+      '@mongodb-js/saslprep': 1.2.2
+      bson: 6.10.4
+      mongodb-connection-string-url: 3.0.2
+
   mongoose@8.15.1:
     dependencies:
       bson: 6.10.3
@@ -7546,7 +7591,7 @@ snapshots:
 
   typedarray@0.0.6: {}
 
-  typeorm@0.3.24(mongodb@6.16.0)(mysql2@3.14.1)(redis@4.7.1)(reflect-metadata@0.2.2)(ts-node@10.9.2(@types/node@20.17.50)(typescript@5.8.3)):
+  typeorm@0.3.24(mongodb@6.17.0)(mysql2@3.14.1)(redis@4.7.1)(reflect-metadata@0.2.2)(ts-node@10.9.2(@types/node@20.17.50)(typescript@5.8.3)):
     dependencies:
       '@sqltools/formatter': 1.2.5
       ansis: 3.17.0
@@ -7564,7 +7609,7 @@ snapshots:
       uuid: 11.1.0
       yargs: 17.7.2
     optionalDependencies:
-      mongodb: 6.16.0
+      mongodb: 6.17.0
       mysql2: 3.14.1
       redis: 4.7.1
       ts-node: 10.9.2(@types/node@20.17.50)(typescript@5.8.3)
